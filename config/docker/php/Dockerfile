@@ -16,9 +16,16 @@ RUN docker-php-ext-install pdo_mysql
 RUN docker-php-ext-install curl
 RUN docker-php-ext-install bcmath
 
+### ZIP - START
+RUN apk add --no-cache zip libzip-dev
+RUN docker-php-ext-configure zip
+RUN docker-php-ext-install zip
+### ZIP - END
+
 ### GD - START
 RUN apk add --no-cache freetype libpng libjpeg-turbo freetype-dev libpng-dev libjpeg-turbo-dev
 RUN docker-php-ext-configure gd
+RUN docker-php-ext-install gd
 ### GD - END
 
 RUN docker-php-ext-configure opcache --enable-opcache \
