@@ -8,26 +8,17 @@ RUN apk add --no-cache bash vim git \
     libmemcached-dev \
     openssh
 
-RUN \
-    docker-php-ext-install sockets && \
-    docker-php-ext-install json && \
-    docker-php-ext-install ctype && \
-    docker-php-ext-install pdo && \
-    docker-php-ext-install pdo_mysql && \
-    docker-php-ext-install curl && \
-    docker-php-ext-install bcmath && \
-    docker-php-ext-install mbstring && \
-    docker-php-ext-install zip
+RUN docker-php-ext-install sockets
+RUN docker-php-ext-install json
+RUN docker-php-ext-install ctype
+RUN docker-php-ext-install pdo
+RUN docker-php-ext-install pdo_mysql
+RUN docker-php-ext-install curl
+RUN docker-php-ext-install bcmath
 
 ### GD - START
-RUN apk add --no-cache freetype libpng libjpeg-turbo freetype-dev libpng-dev libjpeg-turbo-dev && \
-    docker-php-ext-configure gd \
-        --with-gd \
-        --with-freetype-dir=/usr/include/ \
-        --with-png-dir=/usr/include/ \
-        --with-jpeg-dir=/usr/include/ && \
-    NPROC=$(grep -c ^processor /proc/cpuinfo 2>/dev/null || 1) && \
-    docker-php-ext-install gd
+RUN apk add --no-cache freetype libpng libjpeg-turbo freetype-dev libpng-dev libjpeg-turbo-dev
+RUN docker-php-ext-configure gd
 ### GD - END
 
 RUN docker-php-ext-configure opcache --enable-opcache \

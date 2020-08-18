@@ -27,7 +27,6 @@ services:
       - ~/.ssh:/var/www/.ssh
     depends_on:
       - mysql
-      - redis
     networks:
       - app-network
 
